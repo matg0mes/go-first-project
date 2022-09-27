@@ -9,6 +9,10 @@ type Order struct {
 	FinalPrice float64
 }
 
+type OrderRepositoryInterface interface {
+	Save(order *Order) error
+}
+
 func NewOrder(id string, price float64, tax float64) (*Order, error) {
 	order := &Order{
 		ID:    id,
