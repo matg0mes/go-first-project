@@ -6,15 +6,15 @@ type Order struct {
 	ID         string
 	Price      float64
 	Tax        float64
-	FinalPrice float32
+	FinalPrice float64
 }
 
-func NewOrder(id string, price float64, tax float64) (*Order, error){
+func NewOrder(id string, price float64, tax float64) (*Order, error) {
 	order := &Order{
-		ID: id,
+		ID:    id,
 		Price: price,
-		Tax: tax,
-	} 
+		Tax:   tax,
+	}
 
 	err := order.IsValid()
 
@@ -26,7 +26,7 @@ func NewOrder(id string, price float64, tax float64) (*Order, error){
 }
 
 func (o Order) IsValid() error {
-	if o.ID =="" {
+	if o.ID == "" {
 		return errors.New("Invalid id")
 	}
 
@@ -37,7 +37,15 @@ func (o Order) IsValid() error {
 	if o.Tax == 0 {
 		return errors.New("Invalid id")
 	}
-	
+
 	return nil
 }
 
+func (o *Order) CalculateFinalPrice() error {
+	o.FinalPrice = o.Price + o.Tax
+	err := o.IsValid()
+	if err != nil {
+		return err
+	}
+	return nil
+}
