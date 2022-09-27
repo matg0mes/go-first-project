@@ -3,6 +3,7 @@ package database
 import (
 	"database/sql"
 
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/matg0mes/go-first-project/internal/order/entity"
 )
 
@@ -27,3 +28,4 @@ func(r *OrderRepository) Save(order *entity.Order) error {
 	}
 	return nil
 }
+ 
