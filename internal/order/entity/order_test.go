@@ -1,1 +1,35 @@
 package entity_test
+
+import (
+	"testing"
+
+	"github.com/matg0mes/go-first-project/internal/order/entity"
+	"github.com/stretchr/testify/assert"
+)
+
+func TestGivenAnEmptyId_WhenCreateANewOrder_ThenShouldReceiveAnError(t *testing.T) {
+	order := entity.Order{}
+
+	assert.Error(t, order.IsValid(), "Invalid id")
+}
+
+func TestGivenAnEmptyPrice_WhenCreateANewOrder_ThenShouldReceiveAnError(t *testing.T) {
+	order := entity.Order{ID: "123"}
+
+	assert.Error(t, order.IsValid(), "Invalid id")
+}
+
+func TestGivenAnEmptyTax_WhenCreateANewOrder_ThenShouldReceiveAnError(t *testing.T) {
+	order := entity.Order{ID: "123", Price: 0}
+
+	assert.Error(t, order.IsValid(), "Invalid id")
+}
+
+func TestGivenEntityParams_WhenCallNewOrder_ThenShould_ReceiveCreateOrderWithAllParams(t *testing.T) {
+	order, err := entity.NewOrder("123", 10, 2)
+	assert.NoError(t, err)
+	assert.Equal(t, "123", order.ID)
+	assert.Equal(t, 10.0, order.Price)
+	assert.Equal(t, 2.0, order.Tax)
+}
+
