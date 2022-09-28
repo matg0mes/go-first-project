@@ -17,7 +17,7 @@ func main() {
 	uc := usecase.NewCalculateFinalPriceUseCase(repository)
 
 	input := usecase.OrderInputDTO{
-		ID: "1234",
+		ID: "12345",
 		Price: 100,
 		Tax: 10,
 	}
